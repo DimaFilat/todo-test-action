@@ -1,0 +1,35 @@
+body {
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  margin: 0;
+}
+
+.root {
+  padding: 0;
+  display: block;
+  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  background-color: yellow;
+}
+
+.container {
+  display: flex;
+}
+
+.marker {
+  position: absolute;
+  /**
+  * height of AppBar YandexBrowser
+  */
+  bottom: 88px;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  background-color: #3f3;
+  color: #fff;
+}

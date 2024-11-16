@@ -6,9 +6,17 @@ jobs:
   run-shell-command:
     runs-on: ubuntu-latest
     steps:
-      - name: echo a string
-        run: echo "Hello World"
-      - name: multiline script
+      - name: List files
         run: |
-          node -v
-          npm -v
+          pwd
+          ls -a
+          echo $GITHUB_SHA
+          echo $GITHUB_REPOSITORY
+          echo $GITHUB_WORKSPACE
+          echo "${{ github.token }}"
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: List files after Checkout
+        run: |
+          pwd
+          ls -a

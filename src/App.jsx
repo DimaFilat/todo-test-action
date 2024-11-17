@@ -4,7 +4,7 @@ import { PropTypes } from "prop-types";
 function App() {
   const [count, setCount] = useState(1);
 
-  console.log(1);
+  console.log(2);
 
   useEffect(() => {
     console.log(2);

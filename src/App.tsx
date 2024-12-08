@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { PropTypes } from "prop-types";
+import { useEffect, useState } from 'react';
 
 function App() {
   const [count, setCount] = useState(1);
@@ -18,21 +17,23 @@ function App() {
     setCount((c) => c + 1);
   }, []);
 
-  return <Child count={count} />;
+  return (
+    <>
+      <Child count={count} />
+      <button onClick={() => setCount((c) => (c -= 1))}>dec</button>
+      <button onClick={() => setCount((c) => (c += 1))}>inc</button>
+    </>
+  );
 }
 
-function Child({ count }) {
+function Child({ count }: { count: number }) {
   useEffect(() => {
     console.log(5);
     return () => {
       console.log(6);
     };
   }, [count]);
-  return null;
+  return <div>Count {count}</div>;
 }
-
-Child.propTypes = {
-  count: PropTypes.number,
-};
 
 export default App;

@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-24.04
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -21,8 +23,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Use NojeJs
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
+          persist-credentials: false
           node-version: '20.x'
       - run: npm ci
       - run: npm run format
@@ -47,10 +50,9 @@ jobs:
         uses: actions/download-artifact@v4
       - name: Create a release
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: npx semantic-release
+        run: npx --no-install semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy to staging
         if: github.event_name == 'push'
         uses: bcomnes/deploy-to-neocities@v3

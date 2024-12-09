@@ -8,7 +8,7 @@ export default mergeConfig(
     test: {
       coverage: {
         reporter: ['text', 'json', 'html'],
-        exclude: ['./src/main.jsx', ...configDefaults.exclude],
+        exclude: ['./src/main.jsx', '**/*.config.{js,ts}', ...configDefaults.exclude],
       },
       environment: 'jsdom',
       globals: true,

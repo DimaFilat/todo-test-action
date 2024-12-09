@@ -8,11 +8,11 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Cache node_modules
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -27,9 +27,22 @@ jobs:
       - run: npm test -- --coverage
         env:
           CI: true
+      - name: Upload test coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-coverage
+          path: ./coverage
       - name: build project
         if: github.event_name == 'push'
         run: npm run build
+      - name: Upload build folder
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: dist
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
       - name: Deploy to staging
         if: github.event_name == 'push'
         uses: bcomnes/deploy-to-neocities@v3

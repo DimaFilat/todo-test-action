@@ -44,7 +44,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
       - name: Create a release
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

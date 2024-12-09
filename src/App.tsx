@@ -19,6 +19,7 @@ function App() {
 
   return (
     <>
+      <h1>Test</h1>
       <Child count={count} />
       <button onClick={() => setCount((c) => (c -= 1))}>dec</button>
       <button onClick={() => setCount((c) => (c += 1))}>inc</button>

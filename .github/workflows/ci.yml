@@ -45,9 +45,9 @@ jobs:
         uses: actions/download-artifact@v4
       - name: Create a release
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: echo ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy to staging
         if: github.event_name == 'push'
         uses: bcomnes/deploy-to-neocities@v3
